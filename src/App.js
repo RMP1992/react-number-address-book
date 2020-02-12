@@ -1,44 +1,40 @@
-import Home from './components/Home'
 import './App.css';
-
 import React, { Component } from 'react'
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = [
-      {
-        name: "Carmen",
-        number: 7293894343,
-      },
-      {
-        name: "Sam",
-        number: 7296574643,
-      },
-      {
-        name: "Paulo",
-        number: 7527384943,
-      },
-      {
-        name: "Pedro",
-        number: 7293894343,
-      },
-      {
-        name: "Carmen",
-        number: 7293894343,
-      },
-    ]
-
-    
+  state = {
+    input:[],
+    userValue: "",
   }
+  
+  search = (event)=>{
+    this.setState({userValue: event.target.value})
+    console.log(this.state.userValue)
+  }
+  archive = () =>{
+    this.setState({input:[...this.state.input, this.state.userValue]})
+    console.log(this.state.input)
+  }
+  
   render() {
+    const allinputs = this.state.input.map( input => {return <h2>{input}</h2>})
     return (
-      <div className="App">
-      <div id="container">
-        <Home heading="Call me maybe"/>
-      </div>
-      
-    </div>
+      <div>
+            <div id="heading">
+                <h1>Call me maybe</h1>
+            </div>
+            <div className='userInput'>
+                
+                <input id="input" value= {this.state.value} onChange={this.search}/>
+                
+            </div>
+            <div id='btn-container'>
+                <button id="submit" onClick={this.archive}>Submit</button>
+            </div>
+            <div id="para-container">
+                {allinputs}
+            </div>
+        </div>
     )
   }
 }
